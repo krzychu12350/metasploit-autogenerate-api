@@ -37,7 +37,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Msf\\MetasploitApi\\MetasploitApiServiceProvider"
+                "Krzychu12350\\MetasploitApi\\MetasploitApiServiceProvider"
             ]
         }
     }
