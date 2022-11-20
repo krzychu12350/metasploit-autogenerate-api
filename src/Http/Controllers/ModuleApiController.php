@@ -17,7 +17,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\exploits')]
+	#[\Spatie\RouteAttributes\Attributes\Get('exploits')]
 	public function exploits(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->exploits();
@@ -27,7 +27,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\auxiliary')]
+	#[\Spatie\RouteAttributes\Attributes\Get('auxiliary')]
 	public function auxiliary(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->auxiliary();
@@ -37,7 +37,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\post')]
+	#[\Spatie\RouteAttributes\Attributes\Get('post')]
 	public function post(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->post();
@@ -47,7 +47,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\payloads')]
+	#[\Spatie\RouteAttributes\Attributes\Get('payloads')]
 	public function payloads(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->payloads();
@@ -57,7 +57,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\encoders')]
+	#[\Spatie\RouteAttributes\Attributes\Get('encoders')]
 	public function encoders(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->encoders();
@@ -67,7 +67,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\noInputCommand')]
+	#[\Spatie\RouteAttributes\Attributes\Get('noInputCommand')]
 	public function noInputCommand(): JsonResponse
 	{
 		$data = $this->moduleApiMethods->noInputCommand();
@@ -77,7 +77,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\info')]
+	#[\Spatie\RouteAttributes\Attributes\Get('info')]
 	public function info($moduleType, $moduleName): JsonResponse
 	{
 		$data = $this->moduleApiMethods->info($moduleType, $moduleName);
@@ -87,20 +87,17 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\options')]
-	public function options(): JsonResponse
+	#[\Spatie\RouteAttributes\Attributes\Get('options')]
+	public function options($moduleType, $moduleName): JsonResponse
 	{
-        $moduleType = "payloads";
-        $moduleName = "windows/shell/reverse_tcp";
-
-        $data = $this->moduleApiMethods->options($moduleType, $moduleName);
-        return response()->json(["status" => true,
-            "message" => "options" . "Works!!!",
-            "data" => $data ], 200);
+		$data = $this->moduleApiMethods->options($moduleType, $moduleName);
+		                    return response()->json(["status" => true,
+		                    "message" => "options" . "Works!!!",
+		                    "data" => $data ], 200);
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\compatiblePayloads')]
+	#[\Spatie\RouteAttributes\Attributes\Get('compatiblePayloads')]
 	public function compatiblePayloads($moduleName): JsonResponse
 	{
 		$data = $this->moduleApiMethods->compatiblePayloads($moduleName);
@@ -110,7 +107,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\targetCompatible')]
+	#[\Spatie\RouteAttributes\Attributes\Get('targetCompatible')]
 	public function targetCompatible($moduleName): JsonResponse
 	{
 		$data = $this->moduleApiMethods->targetCompatible($moduleName);
@@ -120,7 +117,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\compatibleSessions')]
+	#[\Spatie\RouteAttributes\Attributes\Get('compatibleSessions')]
 	public function compatibleSessions($moduleName): JsonResponse
 	{
 		$data = $this->moduleApiMethods->compatibleSessions($moduleName);
@@ -130,7 +127,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\encode')]
+	#[\Spatie\RouteAttributes\Attributes\Get('encode')]
 	public function encode($data, $encoderModule): JsonResponse
 	{
 		$data = $this->moduleApiMethods->encode($data, $encoderModule);
@@ -140,7 +137,7 @@ class ModuleApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\execute')]
+	#[\Spatie\RouteAttributes\Attributes\Get('execute')]
 	public function execute($moduleType, $moduleName): JsonResponse
 	{
 		$data = $this->moduleApiMethods->execute($moduleType, $moduleName);

@@ -17,7 +17,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\addModule')]
+	#[\Spatie\RouteAttributes\Attributes\Get('addModule')]
 	public function addModule($path): JsonResponse
 	{
 		$data = $this->coreApiMethods->addModule($path);
@@ -27,7 +27,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\moduleStats')]
+	#[\Spatie\RouteAttributes\Attributes\Get('moduleStats')]
 	public function moduleStats(): JsonResponse
 	{
 		$data = $this->coreApiMethods->moduleStats();
@@ -37,7 +37,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\reloadModules')]
+	#[\Spatie\RouteAttributes\Attributes\Get('reloadModules')]
 	public function reloadModules(): JsonResponse
 	{
 		$data = $this->coreApiMethods->reloadModules();
@@ -47,7 +47,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\save')]
+	#[\Spatie\RouteAttributes\Attributes\Get('save')]
 	public function save(): JsonResponse
 	{
 		$data = $this->coreApiMethods->save();
@@ -57,7 +57,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\setg')]
+	#[\Spatie\RouteAttributes\Attributes\Get('setg')]
 	public function setg($optionName, $optionValue): JsonResponse
 	{
 		$data = $this->coreApiMethods->setg($optionName, $optionValue);
@@ -67,7 +67,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\unsetg')]
+	#[\Spatie\RouteAttributes\Attributes\Get('unsetg')]
 	public function unsetg($optionName): JsonResponse
 	{
 		$data = $this->coreApiMethods->unsetg($optionName);
@@ -77,7 +77,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\threadList')]
+	#[\Spatie\RouteAttributes\Attributes\Get('threadList')]
 	public function threadList(): JsonResponse
 	{
 		$data = $this->coreApiMethods->threadList();
@@ -87,7 +87,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\threadKill')]
+	#[\Spatie\RouteAttributes\Attributes\Get('threadKill')]
 	public function threadKill($threadID): JsonResponse
 	{
 		$data = $this->coreApiMethods->threadKill($threadID);
@@ -97,7 +97,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\version')]
+	#[\Spatie\RouteAttributes\Attributes\Get('version')]
 	public function version(): JsonResponse
 	{
 		$data = $this->coreApiMethods->version();
@@ -107,7 +107,7 @@ class CoreApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\stop')]
+	#[\Spatie\RouteAttributes\Attributes\Get('stop')]
 	public function stop(): JsonResponse
 	{
 		$data = $this->coreApiMethods->stop();

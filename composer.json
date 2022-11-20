@@ -13,7 +13,8 @@
     "require": {
         "krzychu12350/phpmetasploit": "dev-methods-access-modifiers",
         "nastuzzi-samy/reflection-namespace": "dev-master",
-        "izniburak/laravel-auto-routes": "dev-main"
+        "izniburak/laravel-auto-routes": "dev-main",
+        "spatie/laravel-route-attributes": "dev-main"
     },
     "autoload": {
         "psr-4": {

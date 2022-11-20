@@ -13,8 +13,17 @@ return [
      * Optionally, you can specify group configuration by using key/values
      */
     'directories' => [
+        //spatie/laravel-route-attributes package
+        //local laravel package development path
+        //'Krzychu12350\MetasploitApi\Http\Controllers\\' => base_path('package/MetasploitApi/src/Http/Controllers'),
+
+        //laravel vendor directory path
+        'Krzychu12350\MetasploitApi\Http\Controllers\\' => base_path('vendor\krzychu12350\metasploitapi\src\Http\Controllers'),
+
+
         //pure Laravel, it works
-        dirname(__FILE__) . '../Http/Controllers',
+       // dirname(__FILE__) . '../Http/Controllers',
+
         //package path, it doesn't work
         //base_path('package/MetasploitApi/src/Http/Controllers'),
         /*

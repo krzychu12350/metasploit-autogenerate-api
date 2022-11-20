@@ -111,7 +111,8 @@ class MetasploitApiGenerator
                     return response()->json(["status" => true,
                     "message" => "' . $singleMethod . '" . "Works!!!",
                     "data" => $data ], 200);')
-                    ->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
+                    //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
+                    ->addAttribute('Spatie\RouteAttributes\Attributes\Get', [$singleMethod]);;
 
 
                 foreach ($currentMethodParams as $singleParam) $method->addParameter($singleParam);

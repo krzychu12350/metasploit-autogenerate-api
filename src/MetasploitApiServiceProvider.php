@@ -15,7 +15,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
     public function __construct(Application $app)
     {
-        //require_once __DIR__.'/../vendor/autoload.php';
+        require_once __DIR__.'/../vendor/autoload.php';
         //var_dump(realpath(__DIR__));
         /*
         $app = new Application(
@@ -54,7 +54,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
 
         $this->publishes([
-            __DIR__.'/../config/route-attributes.php' => config_path('route-attributes.php'),
+            __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
         ]);
 
 

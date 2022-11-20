@@ -17,7 +17,7 @@ class PluginApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\load')]
+	#[\Spatie\RouteAttributes\Attributes\Get('load')]
 	public function load($pluginName, $options): JsonResponse
 	{
 		$data = $this->pluginApiMethods->load($pluginName, $options);
@@ -27,7 +27,7 @@ class PluginApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\unload')]
+	#[\Spatie\RouteAttributes\Attributes\Get('unload')]
 	public function unload($pluginName): JsonResponse
 	{
 		$data = $this->pluginApiMethods->unload($pluginName);
@@ -37,7 +37,7 @@ class PluginApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\loaded')]
+	#[\Spatie\RouteAttributes\Attributes\Get('loaded')]
 	public function loaded(): JsonResponse
 	{
 		$data = $this->pluginApiMethods->loaded();
