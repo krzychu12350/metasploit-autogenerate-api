@@ -5,6 +5,8 @@ namespace Krzychu12350\MetasploitApi\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Krzychu12350\Phpmetasploit\AuthApiMethods;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
+use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Post;
 
 class AuthApiController extends Controller
 {
@@ -17,6 +19,7 @@ class AuthApiController extends Controller
 	}
 
 
+    #[Get('my-route')]
 	public function login($myUserName, $myPassword): JsonResponse
 	{
 		$data = $this->authApiMethods->login($myUserName, $myPassword);
@@ -26,6 +29,7 @@ class AuthApiController extends Controller
 	}
 
 
+    #[Post('logout')]
 	public function logout($logoutToken): JsonResponse
 	{
 		$data = $this->authApiMethods->logout($logoutToken);
@@ -35,6 +39,7 @@ class AuthApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\tokenAdd')]
 	public function tokenAdd($newToken): JsonResponse
 	{
 		$data = $this->authApiMethods->tokenAdd($newToken);
@@ -44,6 +49,7 @@ class AuthApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\tokenGenerate')]
 	public function tokenGenerate(): JsonResponse
 	{
 		$data = $this->authApiMethods->tokenGenerate();
@@ -53,6 +59,7 @@ class AuthApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\tokenList')]
 	public function tokenList(): JsonResponse
 	{
 		$data = $this->authApiMethods->tokenList();
@@ -62,6 +69,7 @@ class AuthApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\tokenRemove')]
 	public function tokenRemove($tokenToBeRemoved): JsonResponse
 	{
 		$data = $this->authApiMethods->tokenRemove($tokenToBeRemoved);

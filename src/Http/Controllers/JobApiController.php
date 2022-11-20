@@ -17,6 +17,7 @@ class JobApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\list')]
 	public function list(): JsonResponse
 	{
 		$data = $this->jobApiMethods->list();
@@ -26,6 +27,7 @@ class JobApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\info')]
 	public function info($jobID): JsonResponse
 	{
 		$data = $this->jobApiMethods->info($jobID);
@@ -35,6 +37,7 @@ class JobApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\stop')]
 	public function stop($jobID): JsonResponse
 	{
 		$data = $this->jobApiMethods->stop($jobID);

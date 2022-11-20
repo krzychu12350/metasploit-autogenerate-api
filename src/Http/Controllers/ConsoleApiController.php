@@ -17,6 +17,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\create')]
 	public function create(): JsonResponse
 	{
 		$data = $this->consoleApiMethods->create();
@@ -26,15 +27,17 @@ class ConsoleApiController extends Controller
 	}
 
 
-	public function destroy(): JsonResponse
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\destroy')]
+	public function destroy($consoleID): JsonResponse
 	{
-		$data = $this->consoleApiMethods->destroy(0);
+		$data = $this->consoleApiMethods->destroy($consoleID);
 		                    return response()->json(["status" => true,
 		                    "message" => "destroy" . "Works!!!",
 		                    "data" => $data ], 200);
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\list')]
 	public function list(): JsonResponse
 	{
 		$data = $this->consoleApiMethods->list();
@@ -44,6 +47,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\write')]
 	public function write($consoleID, $command): JsonResponse
 	{
 		$data = $this->consoleApiMethods->write($consoleID, $command);
@@ -53,6 +57,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\read')]
 	public function read($consoleID): JsonResponse
 	{
 		$data = $this->consoleApiMethods->read($consoleID);
@@ -62,6 +67,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\sessionDetach')]
 	public function sessionDetach($consoleID): JsonResponse
 	{
 		$data = $this->consoleApiMethods->sessionDetach($consoleID);
@@ -71,6 +77,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\sessionKill')]
 	public function sessionKill($consoleID): JsonResponse
 	{
 		$data = $this->consoleApiMethods->sessionKill($consoleID);
@@ -80,6 +87,7 @@ class ConsoleApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\tabs')]
 	public function tabs($consoleID, $inputLine): JsonResponse
 	{
 		$data = $this->consoleApiMethods->tabs($consoleID, $inputLine);

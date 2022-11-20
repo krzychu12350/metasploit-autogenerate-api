@@ -110,7 +110,8 @@ class MetasploitApiGenerator
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)->setBody('$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod . '(' . implode(', ', $currentMethodParamsInternalCalling) . ');
                     return response()->json(["status" => true,
                     "message" => "' . $singleMethod . '" . "Works!!!",
-                    "data" => $data ], 200);');
+                    "data" => $data ], 200);')
+                    ->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
 
 
                 foreach ($currentMethodParams as $singleParam) $method->addParameter($singleParam);

@@ -17,6 +17,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\list')]
 	public function list(): JsonResponse
 	{
 		$data = $this->sessionApiMethods->list();
@@ -26,6 +27,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\stop')]
 	public function stop($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->stop($sessionID);
@@ -35,6 +37,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\shellRead')]
 	public function shellRead($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellRead($sessionID, $inputCommand);
@@ -44,6 +47,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\shellWrite')]
 	public function shellWrite($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellWrite($sessionID, $inputCommand);
@@ -53,6 +57,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterWrite')]
 	public function meterpreterWrite($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterWrite($sessionID, $inputCommand);
@@ -62,6 +67,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterRead')]
 	public function meterpreterRead($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterRead($sessionID);
@@ -71,6 +77,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterRun')]
 	public function meterpreterRun($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterRun($sessionID, $inputCommand);
@@ -80,6 +87,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterScript')]
 	public function meterpreterScript($sessionID, $scriptname): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterScript($sessionID, $scriptname);
@@ -89,6 +97,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterSession')]
 	public function meterpreterSession($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterSession($sessionID);
@@ -98,6 +107,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\meterpreterTabs')]
 	public function meterpreterTabs($sessionID, $inputLine): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterTabs($sessionID, $inputLine);
@@ -107,6 +117,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\compatibleModules')]
 	public function compatibleModules($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->compatibleModules($sessionID);
@@ -116,6 +127,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\shellUpgrade')]
 	public function shellUpgrade($sessionID, $ipAddress): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellUpgrade($sessionID, $ipAddress);
@@ -125,6 +137,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\ringClear')]
 	public function ringClear($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringClear($sessionID);
@@ -134,6 +147,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\ringLast')]
 	public function ringLast($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringLast($sessionID);
@@ -143,6 +157,7 @@ class SessionApiController extends Controller
 	}
 
 
+	#[\Spatie\RouteDiscovery\Attributes\Route(fullUri: '\ringPut')]
 	public function ringPut($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringPut($sessionID, $inputCommand);

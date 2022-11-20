@@ -8,12 +8,21 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Krzychu12350\Phpmetasploit\AuthApiMethods;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
-require_once __DIR__.'/../vendor/autoload.php';
+
 
 class MetasploitApiServiceProvider extends ServiceProvider
 {
+
     public function __construct(Application $app)
     {
+        require_once __DIR__.'/../vendor/autoload.php';
+        //var_dump(realpath(__DIR__));
+        /*
+        $app = new Application(
+            realpath(__DIR__)
+        );
+        */
+
         parent::__construct($app);
 
 
@@ -37,16 +46,17 @@ class MetasploitApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        //$this->app->useAppPath(realpath('E:\Zlecenia\metasploit-api\package\MetasploitApi\src'));
+        //dd(app_path());
 
        // $this->app->register('Krzychu12350\Phpmetasploit\ConsoleApiMethods');
         //$this->loadRoutesFrom(__DIR__ . '/routes/api.php');
 
-        /*
+
         $this->publishes([
-            __DIR__.'/../config/msf-routes.php' => config_path('msf-routes.php'),
+            __DIR__.'/../config/route-attributes.php' => config_path('route-attributes.php'),
         ]);
-         */
+
 
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
         //controllers, api routes, form requests
@@ -63,8 +73,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-
+        $this->app->make('Krzychu12350\MetasploitApi\Http\Controllers\AuthApiController');
 
 
 
