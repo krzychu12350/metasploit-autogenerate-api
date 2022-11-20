@@ -55,7 +55,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
-        ]);
+        ],'config');
 
 
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
