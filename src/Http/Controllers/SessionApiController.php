@@ -17,7 +17,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('list')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/list')]
 	public function list(): JsonResponse
 	{
 		$data = $this->sessionApiMethods->list();
@@ -27,7 +27,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('stop')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/stop')]
 	public function stop($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->stop($sessionID);
@@ -37,7 +37,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('shellRead')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/shellRead')]
 	public function shellRead($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellRead($sessionID, $inputCommand);
@@ -47,7 +47,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('shellWrite')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/shellWrite')]
 	public function shellWrite($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellWrite($sessionID, $inputCommand);
@@ -57,7 +57,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterWrite')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterWrite')]
 	public function meterpreterWrite($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterWrite($sessionID, $inputCommand);
@@ -67,7 +67,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterRead')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterRead')]
 	public function meterpreterRead($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterRead($sessionID);
@@ -77,7 +77,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterRun')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterRun')]
 	public function meterpreterRun($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterRun($sessionID, $inputCommand);
@@ -87,7 +87,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterScript')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterScript')]
 	public function meterpreterScript($sessionID, $scriptname): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterScript($sessionID, $scriptname);
@@ -97,7 +97,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterSession')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterSession')]
 	public function meterpreterSession($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterSession($sessionID);
@@ -107,7 +107,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('meterpreterTabs')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/meterpreterTabs')]
 	public function meterpreterTabs($sessionID, $inputLine): JsonResponse
 	{
 		$data = $this->sessionApiMethods->meterpreterTabs($sessionID, $inputLine);
@@ -117,7 +117,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('compatibleModules')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/compatibleModules')]
 	public function compatibleModules($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->compatibleModules($sessionID);
@@ -127,7 +127,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('shellUpgrade')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/shellUpgrade')]
 	public function shellUpgrade($sessionID, $ipAddress): JsonResponse
 	{
 		$data = $this->sessionApiMethods->shellUpgrade($sessionID, $ipAddress);
@@ -137,7 +137,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('ringClear')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/ringClear')]
 	public function ringClear($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringClear($sessionID);
@@ -147,7 +147,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('ringLast')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/ringLast')]
 	public function ringLast($sessionID): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringLast($sessionID);
@@ -157,7 +157,7 @@ class SessionApiController extends Controller
 	}
 
 
-	#[\Spatie\RouteAttributes\Attributes\Get('ringPut')]
+	#[\Spatie\RouteAttributes\Attributes\Get('Session/ringPut')]
 	public function ringPut($sessionID, $inputCommand): JsonResponse
 	{
 		$data = $this->sessionApiMethods->ringPut($sessionID, $inputCommand);
