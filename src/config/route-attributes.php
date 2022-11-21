@@ -18,7 +18,15 @@ return [
         //'Krzychu12350\MetasploitApi\Http\Controllers\\' => base_path('package/MetasploitApi/src/Http/Controllers'),
 
         //laravel vendor directory path
-        'Krzychu12350\MetasploitApi\Http\Controllers\\' => base_path('vendor\krzychu12350\metasploitapi\src\Http\Controllers'),
+        //'Krzychu12350\MetasploitApi\Http\Controllers\\' => base_path('vendor\krzychu12350\metasploitapi\src\Http\Controllers'),
+
+
+
+        base_path('vendor\krzychu12350\metasploitapi\src\Http\Controllers') =>[
+            'namespace' => 'Krzychu12350\MetasploitApi\Http\Controllers\\',
+            'prefix' => 'api',
+        ]
+
 
 
         //pure Laravel, it works
