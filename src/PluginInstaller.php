@@ -49,16 +49,16 @@ class PluginInstaller implements PluginInterface, EventSubscriberInterface
 
     public function onPostPackageInstallOrUpdate(PackageEvent $event)
     {
-        //$vendorDir = $event->getComposer()->getConfig()->get('vendor-dir') . '/';
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir') . '/';
 
         /** @var InstallOperation $item */
         ///$this->createApiMethods();
 
-        $metasploitApiGenerator = new MetasploitApiGenerator();
-        $metasploitApiGenerator::generateApi();
+        //$metasploitApiGenerator = new MetasploitApiGenerator();
+        //$metasploitApiGenerator::generateApi();
 
-        //$this->generateApi();
-        /*
+        $this->generateApi();
+
         foreach ($event->getOperations() as $item) {
 
             $packageInstalled = $item->getPackage()->getName();
@@ -68,7 +68,7 @@ class PluginInstaller implements PluginInterface, EventSubscriberInterface
             echo $vendorDir . $packageInstalled . '/composer.json';
 
         }
-        */
+
 
     }
 
