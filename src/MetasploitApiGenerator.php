@@ -17,7 +17,7 @@ use ReflectionMethod;
 class MetasploitApiGenerator
 {
 
-    public static function classesInNamespace($namespace): array
+    public static function fetchClassesFromSpecificNamespace($namespace): array
     {
         $namespace .= '\\';
         $myClasses = array_filter(get_declared_classes(), function ($item) use ($namespace) {
@@ -48,7 +48,7 @@ class MetasploitApiGenerator
      */
     public static function generateApi()
     {
-        echo 'It works';
+       // echo 'It works';
 
 
         //$methods = $f->getMethods();

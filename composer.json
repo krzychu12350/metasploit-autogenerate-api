@@ -14,7 +14,11 @@
         "krzychu12350/phpmetasploit": "dev-methods-access-modifiers",
         "nastuzzi-samy/reflection-namespace": "dev-master",
         "izniburak/laravel-auto-routes": "dev-main",
-        "spatie/laravel-route-attributes": "dev-main"
+        "spatie/laravel-route-attributes": "dev-main",
+        "composer-plugin-api": "^2.3"
+    },
+    "require-dev": {
+        "composer/composer": "^2.0"
     },
     "autoload": {
         "psr-4": {
