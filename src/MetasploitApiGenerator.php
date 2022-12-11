@@ -39,9 +39,10 @@ class MetasploitApiGenerator
         $ip = "127.0.0.1";
         $port = 55553;
         $webServerURI = "/api/1.0";
-        $msfRpcClient = new MsfRpcClient($userPassword,$ssl,$userName,$ip,$port, $webServerURI);
+        $msfRpcClient = new MsfRpcClient($userPassword, $ssl, $userName, $ip, $port, $webServerURI);
         echo $msfRpcClient->msfAuth();
     }
+
     /**
      * @throws Exception
      */
@@ -67,6 +68,7 @@ class MetasploitApiGenerator
             $namespace->addUse('Krzychu12350\Phpmetasploit\\' . $controllerName . 'ApiMethods');
             $namespace->addUse('Krzychu12350\Phpmetasploit\MsfRpcClient');
             $namespace->addUse('Illuminate\Http\JsonResponse');
+            $namespace->addUse('Spatie\RouteAttributes\Attributes\Post');
 
 
             $className = $controllerName . 'ApiController';
@@ -107,47 +109,24 @@ class MetasploitApiGenerator
                     $currentMethodParamsInternalCalling[] = "$" . $reflectionParameter->getName();
                 }
 
-                $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)->setBody('$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod . '(' . implode(', ', $currentMethodParamsInternalCalling) . ');
+
+                $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
+                    ->setBody('$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
+                        '(' . implode(', ', $currentMethodParamsInternalCalling) . ');
                     return response()->json(["status" => true,
                     "message" => "' . $singleMethod . '" . "Works!!!",
                     "data" => $data ], 200);')
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
-                    ->addAttribute('Spatie\RouteAttributes\Attributes\Get', [$controllerName . '/' . $singleMethod]);;
+                    ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
+                        implode("-", preg_split("/(?=[A-Z])/", $singleMethod))]);
 
 
                 foreach ($currentMethodParams as $singleParam) $method->addParameter($singleParam);
 
 
-                file_put_contents(dirname(__FILE__) . '\\Http\\Controllers\\' . $className . '.php', $file);
+                file_put_contents(dirname(__FILE__) .
+                    '\\Http\\Controllers\\' . $className . '.php', $file);
             }
-
         }
-        $data = "<?php
-
-                use Illuminate\Http\Request;
-                use Illuminate\Support\Facades\Route;
-                use Krzychu12350\MetasploitApi\Http\Controllers\ConsoleApiController;
-                /*
-                |--------------------------------------------------------------------------
-                | API Routes
-                |--------------------------------------------------------------------------
-                |
-                | Here is where you can register API routes for your application. These
-                | routes are loaded by the RouteServiceProvider within a group which
-                | is assigned the 'api' middleware group. Enjoy building your API!
-                |
-                */
-                Route::group(['prefix' => 'api', 'middleware' => 'api'], function (){
-                    Route::get('test', function (){
-                       return 'testttttt';
-                    });
-                    Route::get('/consoles', [ConsoleApiController::class, 'list']);
-                });
-
-                ";
-        file_put_contents(dirname(__FILE__) . '\routes\api.php', $data);
-
-        //echo dirname(__FILE__) . '\routes\api.php';
-
     }
 }
