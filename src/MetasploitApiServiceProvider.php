@@ -73,7 +73,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Krzychu12350\MetasploitApi\Http\Controllers\AuthApiController');
+        //$this->app->make('Krzychu12350\MetasploitApi\Http\Controllers\AuthApiController');
 
 
 
