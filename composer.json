@@ -40,6 +40,9 @@
         "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi"
     },
     "extra": {
+        "extra": {
+            "class": "Krzychu12350\\MetasploitApi\\PluginInstaller"
+        },
         "laravel": {
             "providers": [
                 "Krzychu12350\\MetasploitApi\\MetasploitApiServiceProvider"

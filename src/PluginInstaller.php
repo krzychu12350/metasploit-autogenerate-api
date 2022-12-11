@@ -57,7 +57,7 @@ class PluginInstaller implements PluginInterface, EventSubscriberInterface
         $metasploitApiGenerator = new MetasploitApiGenerator();
         $metasploitApiGenerator::generateApi();
 
-        $this->generateApi();
+        //$this->generateApi();
         /*
         foreach ($event->getOperations() as $item) {
 
