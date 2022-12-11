@@ -1,7 +1,7 @@
 {
     "name": "krzychu12350/metasploitapi",
     "description": "This package will auto generate API using krzychu12350/phpmetasploit package",
-    "type": "library",
+    "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
