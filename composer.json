@@ -1,7 +1,7 @@
 {
     "name": "krzychu12350/metasploitapi",
     "description": "This package will auto generate API using krzychu12350/phpmetasploit package",
-    "type": "library",
+    "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
@@ -40,9 +40,7 @@
         "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi"
     },
     "extra": {
-        "extra": {
-            "class": "Krzychu12350\\MetasploitApi\\PluginInstaller"
-        },
+        "class": "Krzychu12350\\MetasploitApi\\PluginInstaller",
         "laravel": {
             "providers": [
                 "Krzychu12350\\MetasploitApi\\MetasploitApiServiceProvider"
