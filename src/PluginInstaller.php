@@ -11,8 +11,6 @@ use Composer\Plugin\PluginInterface;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PostFileDownloadEvent;
 use Composer\Plugin\PreFileDownloadEvent;
-use Illuminate\Http\JsonResponse;
-use Krzychu12350\MetasploitApi\Http\Controllers\Controller;
 
 class PluginInstaller implements PluginInterface, EventSubscriberInterface
 {
