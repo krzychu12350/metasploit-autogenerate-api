@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Krzychu12350\MetasploitApi\Console\InstallMetasploitApiPackage;
 use Krzychu12350\Phpmetasploit\AuthApiMethods;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
 
@@ -60,6 +61,10 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
             $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
             //controllers, api routes, form requests
+
+            $this->commands([
+                InstallMetasploitApiPackage::class,
+            ]);
         }
 
         //$this->app->register($c);
