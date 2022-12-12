@@ -3,6 +3,7 @@
 namespace Krzychu12350\MetasploitApi;
 
 
+use App\Http\Requests\ApiFormRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Krzychu12350\MetasploitApi\Http\Controllers\Controller;
@@ -48,7 +49,7 @@ class MetasploitApiGenerator
      */
     public static function generateApi()
     {
-       // echo 'It works';
+        // echo 'It works';
 
 
         //$methods = $f->getMethods();
@@ -60,6 +61,7 @@ class MetasploitApiGenerator
 
         $methodsForPassingToController = [];
 
+        //Generating Controllers
 
         $controllerNames = ['Auth', 'Console', 'Core', 'Job', 'Module', 'Plugin', 'Session'];
         foreach ($controllerNames as $controllerName) {
@@ -94,7 +96,7 @@ class MetasploitApiGenerator
             //generating methods according to krzychu12350//phpmetasploit
             foreach (array_diff($allMethods, $publicMethodsOfParentClass) as $singleMethod) {
 
-                echo $singleMethod . PHP_EOL;
+                //echo $singleMethod . PHP_EOL;
 
 
                 //generating methods params according to krzychu12350//phpmetasploit
@@ -105,28 +107,93 @@ class MetasploitApiGenerator
                 $currentMethodParams = [];
                 $currentMethodParamsInternalCalling = [];
                 foreach ($paramsFromReflection as $reflectionParameter) {
-                    $currentMethodParams[] = $reflectionParameter->getName();
+                    $currentMethodParams[] = '$request->' . $reflectionParameter->getName();
                     $currentMethodParamsInternalCalling[] = "$" . $reflectionParameter->getName();
                 }
 
-
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
                     ->setBody('$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
-                        '(' . implode(', ', $currentMethodParamsInternalCalling) . ');
-                    return response()->json(["status" => true,
-                    "message" => "' . $singleMethod . '" . "Works!!!",
-                    "data" => $data ], 200);')
+                        '(' . implode(', ', $currentMethodParams) . ');
+                return response()->json(["status" => true,
+                "message" => "' . $singleMethod . '" . "Works!!!",
+                "data" => $data ], 200);')
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
                     ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
                         implode("-", preg_split("/(?=[A-Z])/", $singleMethod))]);
 
+                if (!empty($currentMethodParamsInternalCalling)) {
+                    $namespace->addUse('Krzychu12350\MetasploitApi\Http\Requests\\' .
+                        $controllerName . $singleMethod . "Request");
+                    $method->addParameter("request")
+                        ->setType('Krzychu12350\MetasploitApi\Http\Requests\\' .
+                            $controllerName . $singleMethod . "Request");
+                }
 
-                foreach ($currentMethodParams as $singleParam) $method->addParameter($singleParam);
+
+                //foreach ($currentMethodParams as $singleParam) $method->addParameter($singleParam);
 
 
                 file_put_contents(dirname(__FILE__) .
                     '\\Http\\Controllers\\' . $className . '.php', $file);
             }
         }
+
+        //Generating FormRequests
+        $controllerNames = ['Auth', 'Console', 'Core', 'Job', 'Module', 'Plugin', 'Session'];
+        foreach ($controllerNames as $controllerName) {
+
+            //getting all methods of specific methodsApi class
+            $f = new ReflectionClass('Krzychu12350\\Phpmetasploit\\' . $controllerName . 'ApiMethods');
+            $publicMethodsOfParentClass = ['msf_execute', '__construct', 'msfAuth', 'msf_console'];
+            $allMethods = [];
+            //print_r(array_diff($allMethods, $publicMethodsOfParentClass));
+
+
+            //get all methods in specific class
+            foreach ($f->getMethods(ReflectionMethod::IS_PUBLIC) as $method) $allMethods[] = $method->getName();
+
+            //$publicMethods = array_diff($allMethods, $publicMethodsOfParentClass);
+            //var_dump($publicMethods);
+            foreach (array_diff($allMethods, $publicMethodsOfParentClass) as $singleMethod) {
+                $r = new ReflectionMethod('Krzychu12350\Phpmetasploit\\' . $controllerName . 'ApiMethods', $singleMethod);
+                $paramsFromReflection = $r->getParameters();
+                //var_dump($singleMethod, $paramsFromReflection);
+
+                if (!empty($paramsFromReflection)) {
+                    echo PHP_EOL;
+                    echo ($singleMethod) . "METHOD" . PHP_EOL;
+                    $file = new PhpGenerator\PhpFile;
+                    $namespace = $file->addNamespace('Krzychu12350\MetasploitApi\Http\Requests');
+                    $namespace->addUse("Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest");
+
+                    //$className = $controllerName . 'ApiController';
+                    $class = $namespace->addClass($controllerName . $singleMethod . "Request");
+                    $class->setExtends("Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest");
+
+                    //$test = implode(', ', $paramsFromReflection);
+                    //var_dump($test);
+
+                    $currentMethodParamss = array();
+                    foreach ($paramsFromReflection as $reflectionParameter) {
+                        $currentMethodParamss[] = "'" . $reflectionParameter->getName() . "' => 'required'";
+                    }
+                    //echo($currentMethodParams) . PHP_EOL;
+                    print_r(implode(', ', $currentMethodParamss));
+                    echo PHP_EOL;
+
+                    $class->addMethod('rules')->setPublic()
+                        ->setBody('return [' . implode(', ', $currentMethodParamss) . '];');
+                    $class->addMethod('authorize')->setPublic()->setBody('return true;');
+
+                    file_put_contents(dirname(__FILE__) .
+                        '\\Http\\Requests\\' . $controllerName . $singleMethod . 'Request.php', $file);
+                }
+
+
+            }
+
+
+        }
     }
 }
+
