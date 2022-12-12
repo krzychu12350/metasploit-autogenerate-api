@@ -52,15 +52,15 @@ class MetasploitApiServiceProvider extends ServiceProvider
        // $this->app->register('Krzychu12350\Phpmetasploit\ConsoleApiMethods');
         //$this->loadRoutesFrom(__DIR__ . '/routes/api.php');
 
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
+            ], 'config');
 
-        $this->publishes([
-            __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
-        ],'config');
 
-
-        $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
-        //controllers, api routes, form requests
-
+            $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+            //controllers, api routes, form requests
+        }
 
         //$this->app->register($c);
 

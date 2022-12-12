@@ -37,7 +37,13 @@
     },
     "scripts": {
         "test": "@php --version",
-        "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi"
+        "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi",
+
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --tag=config--force"
+        ]
     },
     "extra": {
         "class": "Krzychu12350\\MetasploitApi\\PluginInstaller",
