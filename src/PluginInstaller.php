@@ -52,11 +52,11 @@ class PluginInstaller implements PluginInterface, EventSubscriberInterface
         /** @var InstallOperation $item */
         ///$this->createApiMethods();
 
-        //$metasploitApiGenerator = new MetasploitApiGenerator();
-        //$metasploitApiGenerator::generateApi();
+        $metasploitApiGenerator = new MetasploitApiGenerator();
+        $metasploitApiGenerator::generateApi();
 
         //$this->generateApi();
-
+        /*
         foreach ($event->getOperations() as $item) {
 
             $packageInstalled = $item->getPackage()->getName();
@@ -66,6 +66,7 @@ class PluginInstaller implements PluginInterface, EventSubscriberInterface
             echo $vendorDir . $packageInstalled . '/composer.json';
 
         }
+        */
 
 
     }
