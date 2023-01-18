@@ -16,7 +16,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
     public function __construct(Application $app)
     {
-        //require_once __DIR__.'/../vendor/autoload.php';
+        require_once __DIR__.'/../vendor/autoload.php';
         //var_dump(realpath(__DIR__));
         /*
         $app = new Application(
@@ -35,7 +35,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
         $port = 55553;
         $webServerURI = "/api/1.0";
         $c = new MsfRpcClient($userPassword,$ssl,$userName,$ip,$port, $webServerURI);
-        $token = $c->msfAuth();
+        //$token = $c->msfAuth();
 
 
     }

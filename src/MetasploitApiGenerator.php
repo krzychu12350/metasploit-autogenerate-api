@@ -110,18 +110,29 @@ class MetasploitApiGenerator
                     $currentMethodParams[] = '$request->' . $reflectionParameter->getName();
                     $currentMethodParamsInternalCalling[] = "$" . $reflectionParameter->getName();
                 }
-
+                $methodEndpointName = strtolower(implode("-", preg_split("/(?=[A-Z])/", $singleMethod)));
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
-                    ->setBody('$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
+                    ->setBody('$this->' . strtolower($controllerName)
+                        . 'ApiMethods->setToken($request->header("Authorization"));
+                    $data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
                         '(' . implode(', ', $currentMethodParams) . ');
                 return response()->json(["status" => true,
                 "message" => "' . $singleMethod . '" . "Works!!!",
                 "data" => $data ], 200);')
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
                     ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
-                        implode("-", preg_split("/(?=[A-Z])/", $singleMethod))]);
+                        $methodEndpointName]);
 
-                if (!empty($currentMethodParamsInternalCalling)) {
+                var_dump($methodEndpointName);
+
+
+                //strtolower(
+                if (empty($currentMethodParamsInternalCalling)) {
+                    $namespace->addUse('Illuminate\Http\Request');
+                    $method->addParameter("request")
+                        ->setType('Illuminate\Http\Request');
+                } else {
+
                     $namespace->addUse('Krzychu12350\MetasploitApi\Http\Requests\\' .
                         $controllerName . $singleMethod . "Request");
                     $method->addParameter("request")
