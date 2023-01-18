@@ -3,7 +3,7 @@
 namespace Krzychu12350\MetasploitApi;
 
 
-use App\Http\Requests\ApiFormRequest;
+use Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Krzychu12350\MetasploitApi\Http\Controllers\Controller;
@@ -79,7 +79,7 @@ class MetasploitApiGenerator
 
             //getting all methods of specific methodsApi class
             $f = new ReflectionClass('Krzychu12350\\Phpmetasploit\\' . $controllerName . 'ApiMethods');
-            $publicMethodsOfParentClass = ['msf_execute', '__construct', 'msfAuth', 'msf_console'];
+            $publicMethodsOfParentClass = ['msf_execute', '__construct', 'msfAuth', 'msf_console','setToken'];
             $allMethods = [];
             //print_r(array_diff($allMethods, $publicMethodsOfParentClass));
 
