@@ -15,7 +15,7 @@
         "izniburak/laravel-auto-routes": "dev-main",
         "spatie/laravel-route-attributes": "dev-main",
         "composer-plugin-api": "^2.3",
-        "krzychu12350/phpmetasploit": "dev-master"
+        "krzychu12350/phpmetasploit": "dev-error-handling"
     },
     "require-dev": {
         "composer/composer": "^2.0"
