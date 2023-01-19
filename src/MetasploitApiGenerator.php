@@ -112,13 +112,11 @@ class MetasploitApiGenerator
                 }
                 $methodEndpointName = strtolower(implode("-", preg_split("/(?=[A-Z])/", $singleMethod)));
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
-                    ->setBody('$this->' . strtolower($controllerName)
-                        . 'ApiMethods->setToken($request->header("Authorization"));
-                    $data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
-                        '(' . implode(', ', $currentMethodParams) . ');
-                return response()->json(["status" => true,
-                "message" => "' . $singleMethod . '" . "Works!!!",
-                "data" => $data ], 200);')
+                    ->setBody('$this->' . strtolower($controllerName) . 'ApiMethods->setToken($request->header("Authorization"));'
+                        . "\n" . '$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
+                        '(' . implode(', ', $currentMethodParams) . ');' . "\n" .
+                        'return response()->json(['. "\n\t" . '"status" => true, '. "\n\t" . '"message" => "' . $singleMethod .
+                        ' works!!!", '. "\n\t" . '"data" => $data ], '. "\n\t" . '200);')
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
                     ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
                         $methodEndpointName]);
@@ -178,7 +176,7 @@ class MetasploitApiGenerator
                     $namespace->addUse("Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest");
 
                     //$className = $controllerName . 'ApiController';
-                    $class = $namespace->addClass($controllerName . $singleMethod . "Request");
+                    $class = $namespace->addClass($controllerName . ucfirst($singleMethod) . "Request");
                     $class->setExtends("Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest");
 
                     //$test = implode(', ', $paramsFromReflection);
@@ -197,7 +195,7 @@ class MetasploitApiGenerator
                     $class->addMethod('authorize')->setPublic()->setBody('return true;');
 
                     file_put_contents(dirname(__FILE__) .
-                        '\\Http\\Requests\\' . $controllerName . $singleMethod . 'Request.php', $file);
+                        '\\Http\\Requests\\' . $controllerName . ucfirst($singleMethod) . 'Request.php', $file);
                 }
 
 
