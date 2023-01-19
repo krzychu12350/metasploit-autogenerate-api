@@ -112,11 +112,14 @@ class MetasploitApiGenerator
                 }
                 $methodEndpointName = strtolower(implode("-", preg_split("/(?=[A-Z])/", $singleMethod)));
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
-                    ->setBody('$this->' . strtolower($controllerName) . 'ApiMethods->setToken($request->header("Authorization"));'
-                        . "\n" . '$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
-                        '(' . implode(', ', $currentMethodParams) . ');' . "\n" .
-                        'return response()->json(['. "\n\t" . '"status" => true, '. "\n\t" . '"message" => "' . $singleMethod .
-                        ' works!!!", '. "\n\t" . '"data" => $data ], '. "\n\t" . '200);')
+                    ->setBody('try {'. "\n\t" . '$this->' . strtolower($controllerName) . 'ApiMethods->setToken($request->header("Authorization"));'
+                        . "\n\t" . '$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
+                        '(' . implode(', ', $currentMethodParams) . ');' . "\n\t" .
+                        'return response()->json(['. "\n\t\t" . '"status" => true, '. "\n\t\t" . '"data" => $data], '. "\n\t\t" . '200);' . "\n" .
+                        '} catch (\Exception $e) {'. "\n\t" . 'return response()->json([' . "\n\t\t" .
+                        '"status" => false,'. "\n\t\t" . '"message" => $e->getMessage(),'. "\n\t" .
+                        '],' . "\n\t\t" . '$e->getCode());' . "\n" . '}'
+                    )
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
                     ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
                         $methodEndpointName]);
@@ -132,10 +135,10 @@ class MetasploitApiGenerator
                 } else {
 
                     $namespace->addUse('Krzychu12350\MetasploitApi\Http\Requests\\' .
-                        $controllerName . $singleMethod . "Request");
+                        $controllerName . ucfirst($singleMethod) . "Request");
                     $method->addParameter("request")
                         ->setType('Krzychu12350\MetasploitApi\Http\Requests\\' .
-                            $controllerName . $singleMethod . "Request");
+                            $controllerName . ucfirst($singleMethod) . "Request");
                 }
 
 
