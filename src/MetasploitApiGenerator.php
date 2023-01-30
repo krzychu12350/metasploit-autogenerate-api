@@ -7,6 +7,7 @@ use Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Krzychu12350\MetasploitApi\Http\Controllers\Controller;
+use Krzychu12350\MetasploitApi\Traits\MsfRpcClientInitializerTrait;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
 use Nette\PhpGenerator as PhpGenerator;
 use Krzychu12350\Phpmetasploit\AuthApiMethods;
@@ -68,14 +69,14 @@ class MetasploitApiGenerator
             $file = new PhpGenerator\PhpFile;
             $namespace = $file->addNamespace('Krzychu12350\MetasploitApi\Http\Controllers');
             $namespace->addUse('Krzychu12350\Phpmetasploit\\' . $controllerName . 'ApiMethods');
-            $namespace->addUse('Krzychu12350\Phpmetasploit\MsfRpcClient');
             $namespace->addUse('Illuminate\Http\JsonResponse');
             $namespace->addUse('Spatie\RouteAttributes\Attributes\Post');
-
+            $namespace->addUse('Krzychu12350\MetasploitApi\Traits\MsfRpcClientInitializerTrait');
 
             $className = $controllerName . 'ApiController';
             $class = $namespace->addClass($className);
             $class->setExtends(Controller::class);
+            $class->addTrait(MsfRpcClientInitializerTrait::class);
 
             //getting all methods of specific methodsApi class
             $f = new ReflectionClass('Krzychu12350\\Phpmetasploit\\' . $controllerName . 'ApiMethods');
@@ -87,9 +88,10 @@ class MetasploitApiGenerator
             //get all methods in specific class
             foreach ($f->getMethods(ReflectionMethod::IS_PUBLIC) as $method) $allMethods[] = $method->getName();
 
-            $class->addProperty(strtolower($controllerName) . 'ApiMethods')->setType('Krzychu12350\Phpmetasploit\\' . $controllerName . 'ApiMethods')->setPrivate();
+            $class->addProperty(strtolower($controllerName) . 'ApiMethods')
+                ->setType('Krzychu12350\Phpmetasploit\\' . $controllerName . 'ApiMethods')->setPrivate();
 
-            $class->addMethod('__construct')->setBody('$this->' .
+            $class->addMethod('__construct')->setBody('$this->initializeMsfRpcClient();' . "\n" . '$this->' .
                 strtolower($controllerName) . 'ApiMethods = new ' . $controllerName . 'ApiMethods();');
 
 

@@ -16,7 +16,8 @@
         "composer-plugin-api": "^2.3",
         "krzychu12350/phpmetasploit": "dev-error-handling",
         "spatie/laravel-settings": "dev-main",
-        "arcanedev/laravel-settings": "dev-master"
+        "arcanedev/laravel-settings": "dev-master",
+        "predis/predis": "dev-main"
     },
     "require-dev": {
         "composer/composer": "^2.0"

@@ -17,7 +17,9 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
     public function __construct(Application $app)
     {
+        //only for development
         //require_once __DIR__.'/../vendor/autoload.php';
+
         //var_dump(realpath(__DIR__));
         /*
         $app = new Application(
@@ -27,7 +29,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
         parent::__construct($app);
 
-
+        /*
         $userPassword = "pass123";
         $ssl = "true";
         $userName = "user";
@@ -35,6 +37,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
         $port = 55553;
         $webServerURI = "/api/1.0";
         $c = new MsfRpcClient($userPassword,$ssl,$userName,$ip,$port, $webServerURI);
+        */
         //$token = $c->msfAuth();
 
 
@@ -85,7 +88,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
         });
         */
 
-        $this->app->bind(\Arcanedev\LaravelSettings\Contracts\Store::class);
+        //$this->app->bind(\Arcanedev\LaravelSettings\Contracts\Store::class);
 
 
         /*

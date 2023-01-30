@@ -5,18 +5,13 @@ namespace Krzychu12350\MetasploitApi\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleDestroyRequest;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleReadRequest;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleSessionDetachRequest;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleSessionKillRequest;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleTabsRequest;
-use Krzychu12350\MetasploitApi\Http\Requests\ConsoleWriteRequest;
 use Krzychu12350\Phpmetasploit\ConsoleApiMethods;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
 use Spatie\RouteAttributes\Attributes\Post;
 
 class DatabaseApiController extends Controller
 {
+
 
 	#[Post('database/hosts')]
 	public function hosts()

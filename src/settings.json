@@ -1,3 +1,8 @@
 {
-
+    "user_password": "pass123",
+    "ssl":"true",
+    "user_name": "user",
+    "ip": "127.0.0.1",
+    "port": 55553,
+    "web_server_uri": "/api/1.0"
 }
