@@ -2,6 +2,7 @@
 
 namespace Krzychu12350\MetasploitApi;
 
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
 
     public function __construct(Application $app)
     {
-        //require_once __DIR__.'/../vendor/autoload.php';
+        require_once __DIR__.'/../vendor/autoload.php';
         //var_dump(realpath(__DIR__));
         /*
         $app = new Application(
@@ -25,7 +26,6 @@ class MetasploitApiServiceProvider extends ServiceProvider
         */
 
         parent::__construct($app);
-
 
 
         $userPassword = "pass123";
@@ -79,8 +79,13 @@ class MetasploitApiServiceProvider extends ServiceProvider
     public function register()
     {
         //$this->app->make('Krzychu12350\MetasploitApi\Http\Controllers\AuthApiController');
+        /*
+        $this->app->bind('SettingsServiceProvider', function ($app) {
+            return new \Arcanedev\LaravelSettings\SettingsServiceProvider::class;
+        });
+        */
 
-
+        $this->app->bind(\Arcanedev\LaravelSettings\Contracts\Store::class);
 
 
         /*

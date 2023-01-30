@@ -15,7 +15,9 @@
         "izniburak/laravel-auto-routes": "dev-main",
         "spatie/laravel-route-attributes": "dev-main",
         "composer-plugin-api": "^2.3",
-        "krzychu12350/phpmetasploit": "dev-error-handling"
+        "krzychu12350/phpmetasploit": "dev-error-handling",
+        "spatie/laravel-settings": "dev-main",
+        "arcanedev/laravel-settings": "dev-master"
     },
     "require-dev": {
         "composer/composer": "^2.0"
@@ -37,19 +39,14 @@
     },
     "scripts": {
         "test": "@php --version",
-        "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi",
-
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan vendor:publish --tag=config--force"
-        ]
+        "generate": "Krzychu12350\\MetasploitApi\\MetasploitApiGenerator::generateApi"
     },
     "extra": {
         "class": "Krzychu12350\\MetasploitApi\\PluginInstaller",
         "laravel": {
             "providers": [
-                "Krzychu12350\\MetasploitApi\\MetasploitApiServiceProvider"
+                "Krzychu12350\\MetasploitApi\\MetasploitApiServiceProvider",
+                "Arcanedev\\LaravelSettings\\SettingsServiceProvider"
             ]
         }
     }

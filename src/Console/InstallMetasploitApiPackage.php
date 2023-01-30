@@ -52,10 +52,16 @@ class InstallMetasploitApiPackage extends Command
             '--tag' => "config"
         ];
 
+        $params2 = [
+            '--provider' => "Arcanedev\LaravelSettings\SettingsServiceProvider",
+            '--tag' => "config"
+        ];
+
         if ($forcePublish === true) {
             $params['--force'] = true;
         }
 
         $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params2);
     }
 }
