@@ -11,7 +11,6 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "nastuzzi-samy/reflection-namespace": "dev-master",
         "izniburak/laravel-auto-routes": "dev-main",
         "spatie/laravel-route-attributes": "dev-main",
         "composer-plugin-api": "^2.3",
