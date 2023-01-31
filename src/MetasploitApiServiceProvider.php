@@ -20,7 +20,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
     public function __construct(Application $app)
     {
         //only for development
-        require_once __DIR__.'/../vendor/autoload.php';
+        //require_once __DIR__.'/../vendor/autoload.php';
 
         //var_dump(realpath(__DIR__));
         /*
