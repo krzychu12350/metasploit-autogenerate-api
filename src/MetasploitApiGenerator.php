@@ -18,6 +18,15 @@ use ReflectionMethod;
 
 class MetasploitApiGenerator
 {
+    public static function convertCamelCaseStringToSnakeCase($str, $separator = "_")
+    {
+        if (empty($str)) {
+            return $str;
+        }
+        $str = lcfirst($str);
+        $str = preg_replace("/[A-Z]/", $separator . "$0", $str);
+        return strtolower($str);
+    }
 
     public static function fetchClassesFromSpecificNamespace($namespace): array
     {
@@ -109,8 +118,8 @@ class MetasploitApiGenerator
                 $currentMethodParams = [];
                 $currentMethodParamsInternalCalling = [];
                 foreach ($paramsFromReflection as $reflectionParameter) {
-                    $currentMethodParams[] = '$request->' . $reflectionParameter->getName();
-                    $currentMethodParamsInternalCalling[] = "$" . $reflectionParameter->getName();
+                    $currentMethodParams[] = '$request->' . self::convertCamelCaseStringToSnakeCase($reflectionParameter->getName());
+                    $currentMethodParamsInternalCalling[] = "$" . self::convertCamelCaseStringToSnakeCase($reflectionParameter->getName());
                 }
                 $methodEndpointName = strtolower(implode("-", preg_split("/(?=[A-Z])/", $singleMethod)));
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
@@ -126,7 +135,7 @@ class MetasploitApiGenerator
                     ->addAttribute('Spatie\RouteAttributes\Attributes\Post', [strtolower($controllerName) . '/' .
                         $methodEndpointName]);
 
-                var_dump($methodEndpointName);
+                //var_dump($methodEndpointName);
 
 
                 //strtolower(
@@ -189,7 +198,9 @@ class MetasploitApiGenerator
 
                     $currentMethodParamss = array();
                     foreach ($paramsFromReflection as $reflectionParameter) {
-                        $currentMethodParamss[] = "'" . $reflectionParameter->getName() . "' => 'required'";
+                        $currentMethodParamss[] = "'" .
+                            self::convertCamelCaseStringToSnakeCase($reflectionParameter
+                                ->getName()) . "' => 'required'";
                     }
                     //echo($currentMethodParams) . PHP_EOL;
                     print_r(implode(', ', $currentMethodParamss));

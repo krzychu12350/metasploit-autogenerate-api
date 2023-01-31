@@ -2,6 +2,8 @@
 
 namespace Krzychu12350\MetasploitApi\Traits;
 
+use Doctrine\DBAL\Exception;
+use Krzychu12350\MetasploitApi\Models\MsfRpcServerConnection;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
 use Illuminate\Support\Facades\Redis;
 
@@ -23,9 +25,12 @@ trait MsfRpcClientInitializerTrait
         //Redis::hdel('connection:1', 'port');
 
         $connectionNo = 1;
+        //settings()->set('current_connection', 1)->save();
+
+
         //$value = Redis::hGetAll('connection:' . $connectionNo);
-        $connectionSettings = Redis::hgetall("connection:" . $connectionNo);
-        //dd($connectionSettings["user_name"]);
+        //$connectionSettings = Redis::hgetall("connection:" . $connectionNo);
+        //dd($connectionSettings);
         //settings()->set(['user_name' => 'user'])
         //
         //dd(settings()->all());
@@ -48,8 +53,16 @@ trait MsfRpcClientInitializerTrait
         //dd(settings()->all());
         $connData = settings()->all();
         //dd($connectionSettings);
-        new MsfRpcClient($connectionSettings['user_password'], $connectionSettings['ssl'], $connectionSettings['user_name'],
-            $connectionSettings['ip'], $connectionSettings['port'], $connectionSettings['web_server_uri']);
-    }
 
+        try {
+            $currentConnectionId = settings()->get('current_connection');
+            $msfRpcServerConnection = MsfRpcServerConnection::findOrFail($currentConnectionId);
+            new MsfRpcClient($msfRpcServerConnection['user_password'],
+                boolval($msfRpcServerConnection['ssl']) ? 'true' : 'false', $msfRpcServerConnection['user_name'],
+                $msfRpcServerConnection['ip'], $msfRpcServerConnection['port'],
+                $msfRpcServerConnection['web_server_uri']);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

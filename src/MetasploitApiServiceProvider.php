@@ -4,10 +4,12 @@ namespace Krzychu12350\MetasploitApi;
 
 
 use Illuminate\Foundation\Application;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Krzychu12350\MetasploitApi\Console\InstallMetasploitApiPackage;
+use Krzychu12350\MetasploitApi\Http\Middleware\ForceJsonResponse;
 use Krzychu12350\Phpmetasploit\AuthApiMethods;
 use Krzychu12350\Phpmetasploit\MsfRpcClient;
 
@@ -18,7 +20,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
     public function __construct(Application $app)
     {
         //only for development
-        //require_once __DIR__.'/../vendor/autoload.php';
+        require_once __DIR__.'/../vendor/autoload.php';
 
         //var_dump(realpath(__DIR__));
         /*
@@ -57,18 +59,20 @@ class MetasploitApiServiceProvider extends ServiceProvider
         //$this->loadRoutesFrom(__DIR__ . '/routes/api.php');
 
         if ($this->app->runningInConsole()) {
+
             $this->publishes([
                 __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
             ], 'config');
 
 
-            $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
             //controllers, api routes, form requests
 
             $this->commands([
                 InstallMetasploitApiPackage::class,
             ]);
         }
+        $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         //$this->app->register($c);
 

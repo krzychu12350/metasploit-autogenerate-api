@@ -8,7 +8,7 @@ return [
      | Supported: 'array', 'json', 'database', 'redis'
      */
 
-    'default' => 'redis',
+    'default' => 'array',
 
     /* -----------------------------------------------------------------
      |  Drivers
