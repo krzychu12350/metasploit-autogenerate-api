@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redis;
 trait MsfRpcClientInitializerTrait
 {
 
-    public function initializeMsfRpcClient(): void
+    public function initializeMsfRpcClient()
     {
         /*
         Redis::hmset("connection:1", "user_name", "user", 'user_password', 'pass123', "ssl", 'true',
@@ -62,7 +62,13 @@ trait MsfRpcClientInitializerTrait
                 $msfRpcServerConnection['ip'], $msfRpcServerConnection['port'],
                 $msfRpcServerConnection['web_server_uri']);
         } catch (Exception $e) {
-            echo $e->getMessage();
+
+            //echo $e->getMessage();
+            return response()->json([
+                "status" => false,
+                "message" => $e->getMessage()
+            ],
+                500);
         }
     }
 }
