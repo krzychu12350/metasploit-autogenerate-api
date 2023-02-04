@@ -157,7 +157,7 @@ class MetasploitApiGenerator
 
 
                 file_put_contents(dirname(__FILE__) .
-                    '\Http\Controllers\\' . $className . '.php', $file);
+                    '/Http/Controllers/' . $className . '.php', $file);
             }
         }
 
@@ -211,7 +211,7 @@ class MetasploitApiGenerator
                     $class->addMethod('authorize')->setPublic()->setBody('return true;');
 
                     file_put_contents(dirname(__FILE__) .
-                        '\Http\Requests\\' . $controllerName . ucfirst($singleMethod) . 'Request.php', $file);
+                        '/Http/Requests/' . $controllerName . ucfirst($singleMethod) . 'Request.php', $file);
                 }
 
 
