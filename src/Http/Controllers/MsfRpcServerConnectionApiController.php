@@ -14,7 +14,7 @@ use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Post;
 use Spatie\RouteAttributes\Attributes\Put;
 
-class MsfRpcServerConnectionController extends Controller
+class MsfRpcServerConnectionApiController extends Controller
 {
     /**
      * Display a listing of the resource.

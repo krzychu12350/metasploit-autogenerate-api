@@ -18,16 +18,6 @@ use ReflectionMethod;
 
 class MetasploitApiGenerator
 {
-    public static function convertCamelCaseStringToSnakeCase($str, $separator = "_")
-    {
-        if (empty($str)) {
-            return $str;
-        }
-        $str = lcfirst($str);
-        $str = preg_replace("/[A-Z]/", $separator . "$0", $str);
-        return strtolower($str);
-    }
-
     public static function fetchClassesFromSpecificNamespace($namespace): array
     {
         $namespace .= '\\';
@@ -89,7 +79,7 @@ class MetasploitApiGenerator
 
             //getting all methods of specific methodsApi class
             $f = new ReflectionClass('Krzychu12350\\Phpmetasploit\\' . $controllerName . 'ApiMethods');
-            $publicMethodsOfParentClass = ['msf_execute', '__construct', 'msfAuth', 'msf_console','setToken'];
+            $publicMethodsOfParentClass = ['msf_execute', '__construct', 'msfAuth', 'msf_console', 'setToken'];
             $allMethods = [];
             //print_r(array_diff($allMethods, $publicMethodsOfParentClass));
 
@@ -123,12 +113,12 @@ class MetasploitApiGenerator
                 }
                 $methodEndpointName = strtolower(implode("-", preg_split("/(?=[A-Z])/", $singleMethod)));
                 $method = $class->addMethod($singleMethod)->setPublic()->setReturnType(JsonResponse::class)
-                    ->setBody('try {'. "\n\t" . '$this->' . strtolower($controllerName) . 'ApiMethods->setToken($request->header("Authorization"));'
+                    ->setBody('try {' . "\n\t" . '$this->' . strtolower($controllerName) . 'ApiMethods->setToken($request->header("Authorization"));'
                         . "\n\t" . '$data = $this->' . strtolower($controllerName) . 'ApiMethods->' . $singleMethod .
                         '(' . implode(', ', $currentMethodParams) . ');' . "\n\t" .
-                        'return response()->json(['. "\n\t\t" . '"status" => true, '. "\n\t\t" . '"data" => $data], '. "\n\t\t" . '200);' . "\n" .
-                        '} catch (\Exception $e) {'. "\n\t" . 'return response()->json([' . "\n\t\t" .
-                        '"status" => false,'. "\n\t\t" . '"message" => $e->getMessage(),'. "\n\t" .
+                        'return response()->json([' . "\n\t\t" . '"status" => true, ' . "\n\t\t" . '"data" => $data], ' . "\n\t\t" . '200);' . "\n" .
+                        '} catch (\Exception $e) {' . "\n\t" . 'return response()->json([' . "\n\t\t" .
+                        '"status" => false,' . "\n\t\t" . '"message" => $e->getMessage(),' . "\n\t" .
                         '],' . "\n\t\t" . '$e->getCode());' . "\n" . '}'
                     )
                     //->addAttribute('Spatie\RouteDiscovery\Attributes\Route', ['fullUri' => '\\' . $singleMethod]);;
@@ -146,9 +136,11 @@ class MetasploitApiGenerator
                 } else {
 
                     $namespace->addUse('Krzychu12350\MetasploitApi\Http\Requests\\' .
+                        $controllerName . "\\" .
                         $controllerName . ucfirst($singleMethod) . "Request");
                     $method->addParameter("request")
                         ->setType('Krzychu12350\MetasploitApi\Http\Requests\\' .
+                            $controllerName . "\\" .
                             $controllerName . ucfirst($singleMethod) . "Request");
                 }
 
@@ -164,6 +156,10 @@ class MetasploitApiGenerator
         //Generating FormRequests
         $controllerNames = ['Auth', 'Console', 'Core', 'Job', 'Module', 'Plugin', 'Session'];
         foreach ($controllerNames as $controllerName) {
+            $dirPath = dirname(__FILE__) .
+                '/Http/Requests/' . $controllerName;
+
+            if (is_dir($dirPath) == 0) mkdir($dirPath);
 
             //getting all methods of specific methodsApi class
             $f = new ReflectionClass('Krzychu12350\\Phpmetasploit\\' . $controllerName . 'ApiMethods');
@@ -186,7 +182,7 @@ class MetasploitApiGenerator
                     echo PHP_EOL;
                     echo ($singleMethod) . "METHOD" . PHP_EOL;
                     $file = new PhpGenerator\PhpFile;
-                    $namespace = $file->addNamespace('Krzychu12350\MetasploitApi\Http\Requests');
+                    $namespace = $file->addNamespace('Krzychu12350\MetasploitApi\Http\Requests\\' . $controllerName);
                     $namespace->addUse("Krzychu12350\MetasploitApi\Http\Requests\ApiFormRequest");
 
                     //$className = $controllerName . 'ApiController';
@@ -211,7 +207,7 @@ class MetasploitApiGenerator
                     $class->addMethod('authorize')->setPublic()->setBody('return true;');
 
                     file_put_contents(dirname(__FILE__) .
-                        '/Http/Requests/' . $controllerName . ucfirst($singleMethod) . 'Request.php', $file);
+                        '/Http/Requests/' . $controllerName . "/" . $controllerName . ucfirst($singleMethod) . 'Request.php', $file);
                 }
 
 
@@ -219,6 +215,16 @@ class MetasploitApiGenerator
 
 
         }
+    }
+
+    public static function convertCamelCaseStringToSnakeCase($str, $separator = "_")
+    {
+        if (empty($str)) {
+            return $str;
+        }
+        $str = lcfirst($str);
+        $str = preg_replace("/[A-Z]/", $separator . "$0", $str);
+        return strtolower($str);
     }
 }
 

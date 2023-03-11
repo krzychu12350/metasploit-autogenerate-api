@@ -90,4 +90,23 @@ class DatabaseApiController extends Controller
 		}
         */
     }
+
+    #[Post('database/workspaces')]
+    public function workspaces()
+    {
+		try {
+            $data = DB::table('workspaces')->get();
+            return response()->json([
+                "status" => true,
+                "workspaces" => $data],
+                200);
+		} catch (\Exception $e) {
+			return response()->json([
+				"status" => false,
+				"message" => $e->getMessage(),
+			],
+				$e->getCode());
+		}
+
+    }
 }
