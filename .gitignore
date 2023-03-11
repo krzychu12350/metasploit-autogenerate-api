@@ -1,2 +1,17 @@
 vendor/
 composer.lock
+src/Http/Controllers/AuthApiController.php
+src/Http/Controllers/ConsoleApiController.php
+src/Http/Controllers/CoreApiController.php
+src/Http/Controllers/JobApiController.php
+src/Http/Controllers/ModuleApiController.php
+src/Http/Controllers/PluginApiController.php
+src/Http/Controllers/SessionApiController.php
+src/Http/Requests/Auth/
+src/Http/Requests/Console/
+src/Http/Requests/Core/
+src/Http/Requests/Job/
+src/Http/Requests/Module/
+src/Http/Requests/Plugin/
+src/Http/Requests/Session/
+
