@@ -55,7 +55,7 @@ class ScriptApiController extends Controller
             if (Script::where('name', $request->file_name)->exists()) {
                 throw ValidationException::withMessages(
                     [
-                        'The script named ' . $request->file_name . ' already exists'
+                        'The script file named ' . $request->file_name . ' already exists'
                     ]);
             }
 
@@ -118,16 +118,16 @@ class ScriptApiController extends Controller
     public function update(UpdateScriptRequest $request, $id)
     {
         try {
-            $script = Script::findOrFail($id);
 
             /*
             if (Script::where('name', $request->file_name)->exists()) {
                 throw ValidationException::withMessages(
                     [
-                        'The script named ' . $request->file_name . ' already exists'
+                        'The script file named ' . $request->file_name . ' already exists'
                     ]);
             }
             */
+            $script = Script::findOrFail($id);
             $fileOldLocalPath = 'msf_scripts\\' . $script->file_name . '.rc';
             $fileNewLocalPath = 'msf_scripts\\' . $request->file_name . '.rc';
             //dd($fileOldLocalPath, $fileNewLocalPath);

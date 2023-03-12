@@ -23,6 +23,8 @@ class ScriptResource extends JsonResource
             "file_abs_path" => $this->file_abs_path,
             "type" => $this->type,
             "contents" => $this->contents,
+            "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at,
         ];
     }
 }
