@@ -112,7 +112,6 @@ class MetasploitApiGenerator
                             self::convertCamelCaseStringToSnakeCase($reflectionParameter
                                 ->getName()) . "' => 'required'";
                     }
-                    echo PHP_EOL;
                     $class->addMethod('rules')->setPublic()
                         ->setBody('return [' . implode(', ', $currentMethodParamss) . '];');
                     $class->addMethod('authorize')->setPublic()->setBody('return true;');

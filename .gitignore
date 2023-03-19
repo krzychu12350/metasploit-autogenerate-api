@@ -1,5 +1,6 @@
 vendor/
 composer.lock
+.phpunit.result.cache
 src/Http/Controllers/AuthApiController.php
 src/Http/Controllers/ConsoleApiController.php
 src/Http/Controllers/CoreApiController.php
