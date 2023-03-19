@@ -156,7 +156,7 @@ class MsfRpcServerConnectionApiController extends Controller
             settings()->set('current_connection', $connection->id)->save();
 
             return response()->json([
-                "status" => false,
+                "status" => true,
                 "message" => 'Connection was set successfully',
                 "connection_details" => new MsfRpcServerConnectionResource($connection)
             ], 200);
