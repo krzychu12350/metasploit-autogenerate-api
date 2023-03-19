@@ -2,47 +2,17 @@
 
 namespace Krzychu12350\MetasploitApi;
 
-
 use Illuminate\Foundation\Application;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Krzychu12350\MetasploitApi\Console\InstallMetasploitApiPackage;
-use Krzychu12350\MetasploitApi\Http\Middleware\ForceJsonResponse;
-use Krzychu12350\Phpmetasploit\AuthApiMethods;
-use Krzychu12350\Phpmetasploit\MsfRpcClient;
-
 
 class MetasploitApiServiceProvider extends ServiceProvider
 {
-
     public function __construct(Application $app)
     {
         //only for development
-        require_once __DIR__.'/../vendor/autoload.php';
-
-        //var_dump(realpath(__DIR__));
-        /*
-        $app = new Application(
-            realpath(__DIR__)
-        );
-        */
-
+        require_once __DIR__ . '/../vendor/autoload.php';
         parent::__construct($app);
-
-                /*
-        $userPassword = "pass123";
-        $ssl = "true";
-        $userName = "user";
-        $ip = "127.0.0.1";
-        $port = 55553;
-        $webServerURI = "/api/1.0";
-        $c = new MsfRpcClient($userPassword,$ssl,$userName,$ip,$port, $webServerURI);
-        */
-        //$token = $c->msfAuth();
-
-
     }
 
     /**
@@ -52,76 +22,14 @@ class MetasploitApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //$this->app->useAppPath(realpath('E:\Zlecenia\metasploit-api\package\MetasploitApi\src'));
-        //dd(app_path());
-
-       // $this->app->register('Krzychu12350\Phpmetasploit\ConsoleApiMethods');
-        //$this->loadRoutesFrom(__DIR__ . '/routes/api.php');
-
         if ($this->app->runningInConsole()) {
-
             $this->publishes([
                 __DIR__ . '/config/route-attributes.php' => config_path('route-attributes.php'),
             ], 'config');
-
-
-            //controllers, api routes, form requests
-
             $this->commands([
                 InstallMetasploitApiPackage::class,
             ]);
         }
-        $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        //$this->app->register($c);
-
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //$this->app->make('Krzychu12350\MetasploitApi\Http\Controllers\AuthApiController');
-        /*
-        $this->app->bind('SettingsServiceProvider', function ($app) {
-            return new \Arcanedev\LaravelSettings\SettingsServiceProvider::class;
-        });
-        */
-
-        //$this->app->bind(\Arcanedev\LaravelSettings\Contracts\Store::class);
-
-
-        /*
-     * Register the service provider for the dependency.
-     */
-        /*
-        $this->app->bind('Discover', function ($app) {
-            return new \Spatie\RouteDiscovery\Discovery\Discover();
-        });
-        */
-        /*
-        $this->app->bind('Route', function ($app) {
-            return new \Spatie\RouteDiscovery\Attributes\Route();
-        });
-
-        */
-        //$this->app->bind(AuthApiMethods::class);
-
-        /*
-         * Create aliases for the dependency.
-         */
-        //$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-
-        //$loader->alias('Discover', \Spatie\RouteDiscovery\Discovery\Discover::class);
-       // $loader->alias('AuthApiMethods', \Krzychu12350\Phpmetasploit\AuthApiMethods::class);
-       // $loader->alias('ResourceServer', 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade');
-
-
-
-
     }
 }

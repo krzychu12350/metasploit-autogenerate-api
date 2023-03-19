@@ -17,7 +17,7 @@ class InstallMetasploitApiPackage extends Command
 
         $this->info('Publishing configuration...');
 
-        if (! $this->configExists('route-attributes.php')) {
+        if (!$this->configExists('route-attributes.php')) {
             $this->publishConfiguration();
             $this->info('Published configuration');
         } else {
@@ -35,14 +35,6 @@ class InstallMetasploitApiPackage extends Command
     private function configExists($fileName)
     {
         return File::exists(config_path($fileName));
-    }
-
-    private function shouldOverwriteConfig()
-    {
-        return $this->confirm(
-            'Config file already exists. Do you want to overwrite it?',
-            false
-        );
     }
 
     private function publishConfiguration($forcePublish = false)
@@ -63,5 +55,13 @@ class InstallMetasploitApiPackage extends Command
 
         $this->call('vendor:publish', $params);
         $this->call('vendor:publish', $params2);
+    }
+
+    private function shouldOverwriteConfig()
+    {
+        return $this->confirm(
+            'Config file already exists. Do you want to overwrite it?',
+            false
+        );
     }
 }

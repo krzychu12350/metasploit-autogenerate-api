@@ -3,6 +3,7 @@
 namespace Krzychu12350\MetasploitApi\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Krzychu12350\MetasploitApi\Http\Requests\ConnectToMsfRpcServerRequest;
 use Krzychu12350\MetasploitApi\Http\Requests\StoreMsfRpcServerConnectionRequest;
@@ -29,7 +30,7 @@ class MsfRpcServerConnectionApiController extends Controller
                 'status' => true,
                 'connections' => MsfRpcServerConnectionResource::collection(MsfRpcServerConnection::all())
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
@@ -56,7 +57,7 @@ class MsfRpcServerConnectionApiController extends Controller
                 'message' => "Connection was created successfully",
                 'new_connection' => new MsfRpcServerConnectionResource($newConnection)
             ], 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
@@ -81,7 +82,7 @@ class MsfRpcServerConnectionApiController extends Controller
                 'status' => true,
                 'connection' => new MsfRpcServerConnectionResource($msfRpcServerConnection)
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => 'Connection not found',
@@ -109,7 +110,7 @@ class MsfRpcServerConnectionApiController extends Controller
                 'message' => "Connection was updated successfully",
                 'updated_connection' => $msfRpcServerConnection
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => 'Connection not found',
@@ -132,7 +133,7 @@ class MsfRpcServerConnectionApiController extends Controller
             $msfRpcServerConnection?->delete();
 
             return response()->json([], 204);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => 'Connection not found',
@@ -152,16 +153,14 @@ class MsfRpcServerConnectionApiController extends Controller
     {
         try {
             $connection = MsfRpcServerConnection::firstOrCreate($request->validated(), $request->validated());
-            //dd($connection->id);
             settings()->set('current_connection', $connection->id)->save();
-            //dd(settings()->all());
 
             return response()->json([
                 "status" => false,
                 "message" => 'Connection was set successfully',
                 "connection_details" => new MsfRpcServerConnectionResource($connection)
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => 'Connection was not set successfully',

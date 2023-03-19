@@ -9,13 +9,6 @@ class UpdateScriptRequest extends ApiFormRequest
 {
     public function rules()
     {
-        /*
-         *       "name",
-        "file_name",
-        "file_abs_path",
-        "type",
-        "contents",
-         */
         return [
             "name" => "required|string",
             "file_name" => "required|string",
@@ -26,7 +19,6 @@ class UpdateScriptRequest extends ApiFormRequest
             "contents" => "required|string",
         ];
     }
-
 
     public function authorize()
     {

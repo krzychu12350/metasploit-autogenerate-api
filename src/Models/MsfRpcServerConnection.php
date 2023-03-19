@@ -9,9 +9,6 @@ class MsfRpcServerConnection extends Model
 {
     use HasFactory;
 
-    // Disable Laravel's mass assignment protection
-    //protected $guarded = [];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -32,5 +29,4 @@ class MsfRpcServerConnection extends Model
      * @var string
      */
     protected $table = 'msf_rpc_client_connections';
-
 }

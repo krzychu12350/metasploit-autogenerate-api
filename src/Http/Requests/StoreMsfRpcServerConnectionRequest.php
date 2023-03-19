@@ -16,7 +16,6 @@ class StoreMsfRpcServerConnectionRequest extends ApiFormRequest
         ];
     }
 
-
     public function authorize()
     {
         return true;

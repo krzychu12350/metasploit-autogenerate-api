@@ -9,13 +9,6 @@ class StoreScriptRequest extends ApiFormRequest
 {
     public function rules()
     {
-        /*
-         *       "name",
-        "file_name",
-        "file_abs_path",
-        "type",
-        "contents",
-         */
         return [
             "name" => "required|string",
             "file_name" => "required|string",

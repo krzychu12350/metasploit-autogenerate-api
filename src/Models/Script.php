@@ -10,9 +10,6 @@ class Script extends Model
 {
     use HasFactory;
 
-    // Disable Laravel's mass assignment protection
-    //protected $guarded = [];
-
     /**
      * The attributes that are mass assignable.
      *

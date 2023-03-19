@@ -8,7 +8,7 @@ return [
      | Supported: 'array', 'json', 'database', 'redis'
      */
 
-    'default' => 'array',
+    'default' => 'json',
 
     /* -----------------------------------------------------------------
      |  Drivers
@@ -25,7 +25,6 @@ return [
             'driver'  => Arcanedev\LaravelSettings\Stores\JsonStore::class,
 
             'options' => [
-                //'path'   => storage_path('app/settings.json'),
                 'path' => base_path('vendor\krzychu12350\metasploitapi\src\settings.json'),
             ],
         ],

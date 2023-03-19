@@ -16,7 +16,6 @@ class UpdateMsfRpcServerConnectionRequest extends ApiFormRequest
         ];
     }
 
-
     public function authorize()
     {
         return true;

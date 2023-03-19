@@ -2,7 +2,6 @@
 
 namespace Krzychu12350\MetasploitApi\Http\Controllers;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -50,24 +49,17 @@ class ScriptApiController extends Controller
     public function store(StoreScriptRequest $request)
     {
         try {
-            //$request->request->add(['variable' => 'value']);
-            //dd(array_merge($request->validated(), ['file_abs_path' => 'value']));
             if (Script::where('name', $request->file_name)->exists()) {
                 throw ValidationException::withMessages(
                     [
                         'The script file named ' . $request->file_name . ' already exists'
                     ]);
             }
-
             $fileLocalPath = 'msf_scripts\\' . $request->file_name . '.rc';
             Storage::disk('local')->put($fileLocalPath, $request->contents);
-
             $fileAbsPath = str_replace('\\', '/', Storage::disk('local')->path($fileLocalPath));
-
-
             $newScript = Script::create(array_merge($request->validated(), ['file_abs_path' => $fileAbsPath]));
 
-            //dd($newScript);
             return response()->json([
                 'status' => true,
                 'message' => "Script was created successfully",
@@ -118,26 +110,12 @@ class ScriptApiController extends Controller
     public function update(UpdateScriptRequest $request, $id)
     {
         try {
-
-            /*
-            if (Script::where('name', $request->file_name)->exists()) {
-                throw ValidationException::withMessages(
-                    [
-                        'The script file named ' . $request->file_name . ' already exists'
-                    ]);
-            }
-            */
             $script = Script::findOrFail($id);
             $fileOldLocalPath = 'msf_scripts\\' . $script->file_name . '.rc';
             $fileNewLocalPath = 'msf_scripts\\' . $request->file_name . '.rc';
-            //dd($fileOldLocalPath, $fileNewLocalPath);
-            //Storage::disk('local')->put($fileLocalPath, $request->contents);
-            //Storage::disk('local')->move($fileOldLocalPath, $fileNewLocalPath);
-
             Storage::disk('local')->delete($fileOldLocalPath);
             Storage::disk('local')->put($fileNewLocalPath, $request->contents);
             $fileAbsPath = str_replace('\\', '/', Storage::disk('local')->path($fileNewLocalPath));
-
             $script?->update(array_merge($request->validated(), ['file_abs_path' => $fileAbsPath]));
 
             return response()->json([
