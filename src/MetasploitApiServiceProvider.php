@@ -25,6 +25,7 @@ class MetasploitApiServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/Config/route-attributes.php' => config_path('route-attributes.php'),
+                __DIR__ . '/Config/settings.php' => config_path('settings.php'),
             ], 'Config');
             $this->commands([
                 InstallMetasploitApiPackage::class,
