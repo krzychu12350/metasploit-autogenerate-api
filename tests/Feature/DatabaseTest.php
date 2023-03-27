@@ -62,7 +62,7 @@ class DatabaseTest extends TestCase
     {
         $host = DB::table('hosts')->orderBy('id', 'asc')->first();
 
-        $this->get('/api/database/services/' . $host->id)
+        $this->get('/api/database/hosts/' . $host->id . '/services')
             ->assertStatus(200)
             ->assertJsonStructure(['status',
                 'services' =>

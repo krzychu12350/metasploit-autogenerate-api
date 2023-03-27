@@ -1,19 +1,19 @@
 {
     "name": "krzychu12350/metasploitapi",
-    "description": "This package will auto generate API using krzychu12350/phpmetasploit package",
+    "description": "This package will auto generate API allows to interact with Metasploit framework using krzychu 12350/phpmetasploit package.",
     "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
             "name": "Krzysztof Karaś",
-            "email": "krzychu12350@interia.pl"
+            "email": "krzysztofkaras98@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
         "spatie/laravel-route-attributes": "dev-main",
         "composer-plugin-api": "^2.3",
-        "krzychu12350/phpmetasploit": "^1.0",
+        "krzychu12350/phpmetasploit": "^1.0.0",
         "arcanedev/laravel-settings": "dev-master"
     },
     "require-dev": {
