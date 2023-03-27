@@ -4,11 +4,11 @@ namespace Krzychu12350\MetasploitApi\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteAttributes\Attributes\Get;
 
 class DatabaseApiController extends Controller
 {
-    #[Post('database/workspaces/{id}/hosts')]
+    #[Get('database/workspaces/{id}/hosts')]
     public function hosts($id)
     {
         try {
@@ -27,7 +27,7 @@ class DatabaseApiController extends Controller
 
     }
 
-    #[Post('database/services/{id}')]
+    #[Get('database/services/{id}')]
     public function hostServices($id)
     {
         try {
@@ -45,7 +45,7 @@ class DatabaseApiController extends Controller
         }
     }
 
-    #[Post('database/hosts/{id}')]
+    #[Get('database/hosts/{id}')]
     public function hostDetails($id)
     {
         try {
@@ -64,7 +64,7 @@ class DatabaseApiController extends Controller
 
     }
 
-    #[Post('database/workspaces')]
+    #[Get('database/workspaces')]
     public function workspaces()
     {
         try {

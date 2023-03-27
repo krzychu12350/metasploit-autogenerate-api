@@ -13,7 +13,7 @@
     "require": {
         "spatie/laravel-route-attributes": "dev-main",
         "composer-plugin-api": "^2.3",
-        "krzychu12350/phpmetasploit": "dev-error-handling",
+        "krzychu12350/phpmetasploit": "^1.0",
         "arcanedev/laravel-settings": "dev-master"
     },
     "require-dev": {

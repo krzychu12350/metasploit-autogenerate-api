@@ -41,12 +41,12 @@ class InstallMetasploitApiPackage extends Command
     {
         $params = [
             '--provider' => "Krzychu12350\MetasploitApi\MetasploitApiServiceProvider",
-            '--tag' => "config"
+            '--tag' => "Config"
         ];
 
         $params2 = [
             '--provider' => "Arcanedev\LaravelSettings\SettingsServiceProvider",
-            '--tag' => "config"
+            '--tag' => "Config"
         ];
 
         if ($forcePublish === true) {

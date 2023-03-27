@@ -24,7 +24,7 @@ class MsfRpcServerConnectionTest extends TestCase
      */
     public function test_get_rpc_connection_by_id()
     {
-        $response = $this->get('/api/connections/25')->assertStatus(200)->assertJsonStructure(['status', 'connection' => ["id", "user_name", "user_password", "ip", "port", "web_server_uri", "ssl",],]);
+        $response = $this->get('/api/connections/67')->assertStatus(200)->assertJsonStructure(['status', 'connection' => ["id", "user_name", "user_password", "ip", "port", "web_server_uri", "ssl",],]);
     }
 
     /**

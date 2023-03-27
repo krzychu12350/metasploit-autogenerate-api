@@ -16,7 +16,7 @@ class DatabaseTest extends TestCase
     {
         $workspace = DB::table('workspaces')->orderBy('id', 'asc')->first();
 
-        $this->post('/api/database/workspaces/' . $workspace->id . '/hosts')
+        $this->get('/api/database/workspaces/' . $workspace->id . '/hosts')
             ->assertStatus(200)
             ->assertJsonStructure(['status',
                 'data' =>
@@ -62,7 +62,7 @@ class DatabaseTest extends TestCase
     {
         $host = DB::table('hosts')->orderBy('id', 'asc')->first();
 
-        $this->post('/api/database/services/' . $host->id)
+        $this->get('/api/database/services/' . $host->id)
             ->assertStatus(200)
             ->assertJsonStructure(['status',
                 'services' =>
@@ -87,7 +87,7 @@ class DatabaseTest extends TestCase
      */
     public function test_get_all_workspaces()
     {
-        $this->post('/api/database/workspaces')
+        $this->get('/api/database/workspaces')
             ->assertStatus(200)
             ->assertJsonStructure(['status',
                 'workspaces' =>
