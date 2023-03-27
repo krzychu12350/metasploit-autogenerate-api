@@ -27,7 +27,7 @@ class DatabaseApiController extends Controller
 
     }
 
-    #[Get('database/services/{id}')]
+    #[Get('database/hosts/{id}/services')]
     public function hostServices($id)
     {
         try {
